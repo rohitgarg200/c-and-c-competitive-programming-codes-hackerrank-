@@ -1,0 +1,18 @@
+
+    Node *lca(Node *root, int v1,int v2) {
+        Node * temp;
+        temp=root;
+        while(temp!=NULL){
+          if ((temp->data <= v1 && temp->data >= v2) ||
+              (temp->data <= v2 && temp->data >= v1)){
+                  return temp;
+              }
+              else if(temp->data<v1 && temp->data<v2){
+                  temp=temp->right;
+              } else if (temp->data > v1 && temp->data > v2){
+                  temp=temp->left;
+              }
+        }
+		// Write your code here.
+        return temp;
+    }
