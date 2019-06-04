@@ -1,1 +1,1 @@
-# c-and-c-competitive-programming-codes
+# c-and-c++ competitive-programming-codes
