@@ -1,0 +1,49 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+// Complete the appendAndDelete function below.
+string appendAndDelete(string s, string t, int k) {
+    int i=0,j=s.size();
+    
+    int l=t.size();
+    int comp=l;
+    if(j<l){
+        comp=j;
+    }
+    
+    while(s[i]==t[i] && i<comp ){
+        i++;
+}
+int m = k;
+cout<<j<<endl<<l<<endl;
+cout<<i;
+k=k-l-j+2*i;
+if((k%2==0 ||k==0|| k>=2*i)&& k>=0){
+    return "Yes";
+}
+cout<<k;
+return "No";
+}
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    string s;
+    getline(cin, s);
+
+    string t;
+    getline(cin, t);
+
+    int k;
+    cin >> k;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    string result = appendAndDelete(s, t, k);
+
+    fout << result << "\n";
+
+    fout.close();
+
+    return 0;
+}
