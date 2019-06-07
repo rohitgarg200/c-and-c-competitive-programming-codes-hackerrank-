@@ -1,21 +1,45 @@
-void kaprekarNumbers(int p, int q) {
-for(int i=p;i<=q;i++){
-    int s=pow(i,2);
-    int r=i;
-    int count=0;;
-    while(r!=0){
-        r=r/10;
-        count++;
+#include <bits/stdc++.h>
 
-    }
-    int right,left;
-    left=s/pow(10,count);
-    int z=pow(10,count);
-    right=s%z;
-    if(left+right==i){
-        printf("%d ",i);
-    }
+using namespace std;
 
+// Complete the kaprekarNumbers function below.
+void kaprekarNumbers(long int p, long int q) {
+    int re=0;
+  for (int i = p; i <=q; i++) {
+    unsigned long int s = pow(i, 2);
+    unsigned long int r = i;
+    unsigned long int count = 0;
+     
+    while (r != 0) {
+      r = r / 10;
+      count++;
+    }
+    unsigned long int right, left;
+    left = s / pow(10, count);
+   unsigned long int z = pow(10, count);
+    right = s % z;
+    if (left + right == i) {
+     cout<<i<<" ";
+     re++;
+    }
+  }
+if(re==0){
+    cout<<"INVALID RANGE";
+}
+  
 }
 
+int main()
+{
+    int p;
+    cin >> p;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    int q;
+    cin >> q;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    kaprekarNumbers(p, q);
+
+    return 0;
 }
