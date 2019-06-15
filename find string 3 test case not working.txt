@@ -1,0 +1,89 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+/*
+ * Complete the findStrings function below.
+ */
+vector<string> findStrings(vector<string> w, vector<int> queries) {
+    vector<string> r;
+    for(int i=0;i<w.size();i++){
+        for(int j=0;j<w[i].size();j++){
+            
+            for(int k=j;k<w[i].size();k++){
+                int m=0;
+                char c[k-j+1];
+                for(int g=j;g<=k;g++){
+                     c[m]=w[i][g];
+                    m++;
+                    
+                }  c[m]='\0';
+                r.push_back(c);               
+            }              
+        }   
+        
+    }
+    sort(r.begin(),r.end());  
+    vector<string>::iterator ip;
+    ip = unique(r.begin(), r.end() );      
+    r.resize(std::distance(r.begin(), ip));
+    vector<string> ret;
+    for(int i=0;i<queries.size();i++){
+            if(queries[i] <= r.size()){
+            
+            ret.push_back( r[queries[i]-1]);
+        }
+        else{
+            ret.push_back("INVALID");
+        }
+    }
+    return ret;
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    int w_count;
+    cin >> w_count;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    vector<string> w(w_count);
+
+    for (int w_itr = 0; w_itr < w_count; w_itr++) {
+        string w_item;
+        getline(cin, w_item);
+
+        w[w_itr] = w_item;
+    }
+
+    int queries_count;
+    cin >> queries_count;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    vector<int> queries(queries_count);
+
+    for (int queries_itr = 0; queries_itr < queries_count; queries_itr++) {
+        int queries_item;
+        cin >> queries_item;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        queries[queries_itr] = queries_item;
+    }
+
+    vector<string> result = findStrings(w, queries);
+
+    for (int result_itr = 0; result_itr < result.size(); result_itr++) {
+        fout << result[result_itr];
+
+        if (result_itr != result.size() - 1) {
+            fout << "\n";
+        }
+    }
+
+    fout << "\n";
+
+    fout.close();
+
+    return 0;
+}
