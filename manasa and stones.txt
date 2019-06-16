@@ -1,0 +1,126 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+// Complete the stones function below.
+vector<int> stones(int n, int a, int b) {
+    int i=min(a,b);
+    int j=max(a,b);
+    vector<int> ret; 
+    long minele=i*(n-1);
+    int st=n;    
+    ret.push_back(minele);
+    while(st!=1){
+        minele=minele-i;
+        minele=minele+j;
+        ret.push_back(minele);
+        st--;
+    }
+    sort(ret.begin(),ret.end());
+    unique(ret.begin(),ret.end());
+    vector<int>::iterator ip;
+    ip = std::unique(ret.begin(), ret.end());
+    ret.resize(std::distance(ret.begin(), ip));
+    return ret;
+}
+//first approach using binary concept but does n't work on all test case due to bad allocation
+    /*
+
+      int k = n;
+      int ab[k];
+      int y = (pow(2, k));
+      int ret[y];
+      int dis = 0;
+      for (int i = 0; i < k; i++) {
+        ab[i] = 0;
+        ret[i] = 0;
+      }
+      for (int i = 0; i < y; i++) {
+
+        ret[i] = 0;
+      }
+      int j = 0;
+      while (j != (pow(2, k))) {
+        int m = j;
+        int i = n;
+        while (m > 0) {
+          i--;
+          ab[i] = m % 2;
+          m = m / 2;
+        }
+        for (int i = 0; i < k; i++) {
+          if (ab[i] == 0) {
+            ret[j] = ret[j] + a;
+          } else
+            ret[j] = ret[j] + b;
+        }
+
+        for (int l = 0; l < j; l++) {
+          if (ret[l] == ret[j] && ret[l] >= 0 && ret[j] >= 0) {
+            ret[j] = -13000;
+            dis++;
+          } else if (ret[l] > ret[j] && ret[l] >= 0 && ret[j] >= 0) {
+            int key = ret[l];
+            ret[l] = ret[j];
+            for (int m = j; m > l + 1; m--) {
+              ret[m] = ret[m - 1];
+            }
+            ret[l + 1] = key;
+          }
+        }
+
+        j++;
+      }
+
+      vector<int> r(n - dis);
+      int w = 0;
+      for (int i = 0; i < k; i++) {
+        if (ret[i] >= 0) {
+          r[w] = ret[i];
+          w++;
+          printf(" %d ", ret[i]);
+        }
+      }
+
+      return r;
+      
+}*/
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    int T;
+    cin >> T;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    for (int T_itr = 0; T_itr < T; T_itr++) {
+        int n;
+        cin >> n;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        int a;
+        cin >> a;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        int b;
+        cin >> b;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        vector<int> result = stones(n, a, b);
+
+        for (int i = 0; i < result.size(); i++) {
+            fout << result[i];
+
+            if (i != result.size() - 1) {
+                fout << " ";
+            }
+        }
+
+        fout << "\n";
+    }
+
+    fout.close();
+
+    return 0;
+}
