@@ -1,0 +1,65 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+// Complete the organizingContainers function below.
+string organizingContainers(vector<vector<long int>> container) {
+  vector<unsigned long int> sum;
+  vector<unsigned long int> sum1;
+  for (int i = 0; i < container.size(); i++) {
+
+    unsigned long long int summ = 0, summ1 = 0;
+    for (int j = 0; j < container[i].size(); j++) {
+      summ = summ + container[i][j];
+    }
+    sum.push_back(summ);
+    for (int k = 0; k < container.size(); k++) {
+      summ1 = summ1 + container[k][i];
+    }
+    sum1.push_back(summ1);
+    }
+    sort(sum.begin(),sum.end());
+    sort(sum1.begin(),sum1.end());
+    for(long int i=0;i<sum.size();i++){
+        if(sum[i]!=sum1[i]){
+            return "Impossible";
+        }
+    }
+    return "Possible";
+
+
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    int q;
+    cin >> q;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    for (int q_itr = 0; q_itr < q; q_itr++) {
+        int n;
+        cin >> n;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        vector<vector<long int>> container(n);
+        for (int i = 0; i < n; i++) {
+            container[i].resize(n);
+
+            for (int j = 0; j < n; j++) {
+                cin >> container[i][j];
+            }
+
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+
+        string result = organizingContainers(container);
+
+        fout << result << "\n";
+    }
+
+    fout.close();
+
+    return 0;
+}
