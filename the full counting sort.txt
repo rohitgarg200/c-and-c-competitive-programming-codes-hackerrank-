@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+string ltrim(const string &);
+string rtrim(const string &);
+vector<string> split(const string &);
+
+
+int main(){
+    long long int n;
+    cin>>n;
+    ostringstream arr[101];
+    for(long long  int i=0;i<n/2;i++){
+       long long int x;
+        cin>>x;
+        string k;
+        cin>>k;
+        arr[x]<<"- ";
+    }
+    for(long long int i=n/2;i<n;i++){
+        long long int x;
+        cin>>x;
+        string k;
+        cin>>k;
+        arr[x]<<k+" ";
+
+    }
+    for(int i=0;i<101;i++){
+        cout<<arr[i].str();
+    }
+
+}
