@@ -22,52 +22,21 @@ int nonDivisibleSubset(int k, vector<int> s) {
 
       z[a[i]]++;
     }
-   for(int i=1;i<=k/2;i++){
+    if(k%2==0){
+   for(int i=1;i<k/2;i++){
          
         ret=ret+max(z[i],z[k-i]);
       }
-      
-        
-            /*if (a[i] < n && a[i]>0){
-                ret++;
+    }
+    else{
+         for(int i=1;i<=k/2;i++){
+         
+        ret=ret+max(z[i],z[k-i]);
+      }
 
-            }
-            if(a[i]>n ){
-                ret1++;
-            }
-            if(a[i]==n){
-                l++;
-            }
-            if (a[i] == 0) {
-              l1++;
-            }
-          }
-          else{
-              n=k/2;
-              if(a[i]<=n && a[i]>0){
-                  ret++;
-              }
-              if(a[i]>n){
-                  ret1++;
-              }
-              if(a[i]==0){
-                  l1++;
-              }
-          }
-
+    }
         
-        }
-    }
-    if(l){
-        ret++;
-        ret1++;
-    }
-    if(l1){
-        ret++;
-        ret1++;
-    }
-    ret=max(ret,ret1);
-*/
+          
 if(k%2==0 && z[k/2]>0){
     ret++;
 }
