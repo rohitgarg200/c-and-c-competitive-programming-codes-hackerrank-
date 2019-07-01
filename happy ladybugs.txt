@@ -1,0 +1,69 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+// Complete the happyLadybugs function below.
+string happyLadybugs(string b) {
+    
+    int a[26]={0};
+    int check=0;
+    for(int i=0;i<b.size();i++){
+        if(b[i]!='_'){
+            a[b[i]-'A']++;
+        }
+        else check=1;
+    }
+     for(int i=0;i<26;i++){
+        if( a[i]==1){
+            return "NO";
+        }
+    }
+if (check==0){
+    for(int i=0;i<b.size();i++){
+        int j=i;
+        cout<<endl;
+        a[b[i]-'A']--;
+        while(a[b[i]-'A']!=0 && b[i]!='_' && j<(b.size()-1)){
+            cout<<"h"<<endl;
+            if(b[i]!=b[j+1]){
+                return "NO";
+            }
+            a[b[i]-'A']--;
+            j++;
+        }
+        i=j;
+    }
+    return "YES";
+}
+   
+    return "YES";
+    
+
+
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    int g;
+    cin >> g;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    for (int g_itr = 0; g_itr < g; g_itr++) {
+        int n;
+        cin >> n;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        string b;
+        getline(cin, b);
+
+        string result = happyLadybugs(b);
+
+        fout << result << "\n";
+    }
+
+    fout.close();
+
+    return 0;
+}
