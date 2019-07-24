@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+// Complete the theGreatXor function below.
+long theGreatXor(long x) {
+    /*long ret=0;
+for(long i=1;i<=pow(2,floor(log2(x)));i++){
+    if((i^x)>x){
+        ret++;
+    }
+
+}
+return ret;
+*/
+long k=x;
+long t=0;
+while(x){
+    x=x/2;
+    t++;
+}
+return pow(2,t)-k-1;
+
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    int q;
+    cin >> q;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    for (int q_itr = 0; q_itr < q; q_itr++) {
+        long x;
+        cin >> x;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        long result = theGreatXor(x);
+
+        fout << result << "\n";
+    }
+
+    fout.close();
+
+    return 0;
+}
