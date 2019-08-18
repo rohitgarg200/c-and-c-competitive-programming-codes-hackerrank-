@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+int get1(int x,int n ,int i){
+    if(x<0){
+        return 0; 
+    }
+    if(x==0){
+        cout<<"d";
+        return 1;
+    }
+    if(x<pow(i,n)){
+        return 0;
+    }
+    return get1(x-pow(i,n),n,i+1)+get1(x,n,i+1);
+
+}
+
+// Complete the powerSum function below.
+int powerSum(int X, int N) {
+    
+    
+        return get1(X,N,1);
+    
+    
+
+
+
+
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    int X;
+    cin >> X;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    int N;
+    cin >> N;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    int result = powerSum(X, N);
+
+    fout << result << "\n";
+
+    fout.close();
+
+    return 0;
+}
