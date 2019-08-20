@@ -1,0 +1,76 @@
+#include <bits/stdc++.h>
+//#include <boost/multiprecision/cpp_int.hpp>
+//using namespace boost::multiprecision;
+
+using namespace std;
+
+// Complete the substrings function below.
+int substrings(string n) {
+    //map<string,long long int> k;
+    long long int sum=0;
+        //string k=n;
+         long long int l=pow(10,9)+7;
+        /*for(long int i=0;i<k.size();i++){
+            k[i]='1';
+        }*/
+       // cout<<k;
+        long int rep=n.size();
+        long long int k=1;
+        for(int i=n.size()-1;i>=0;i--){
+           // sum=sum+((n[i]-'0')*stoi(k.substr(0,n.size()-i))*rep);
+            sum=sum+(n[i]-'0')*k*rep;
+            rep--;
+            k=k*10 +1;
+            k=k%l;
+
+            sum=sum%l;
+            cout<<sum<<endl;
+        }
+
+
+    //cout<<n.substr(1,1);
+   // k.insert({n.substr(1,1),stoi(n.substr(1,1))});
+  //  cout<<k[n.substr(1,1)];
+   //cout<<k["0"];
+ /*    for(long long int i=0;i<n.size();i++){
+       //  sum=sum+n[i]-'0';
+        for(long long int j=1;j<=n.size()-i;j++){
+      //      if(k[n.substr(i,j)]){
+        //        sum=sum+k[n.substr(i,j)];
+          //  }
+            //else {
+            //k.insert({n.substr(i,j),stoi(n.substr(i,j))});
+            if(abs(i-j)==0){
+                cout<<n[i]<<endl;
+                sum=sum+n[i]-'0';
+            }else
+{
+            sum=sum+stoi(n.substr(i,j));
+            cout<<stoi(n.substr(i,j))<<endl;
+}
+            }
+           // cout<<sum<<endl;
+    }
+    //}
+   // sum=sum+n[n.size()-1]-'0';
+   /
+   */
+//sum=sum%l;
+return sum;
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    string n;
+    getline(cin, n);
+
+    int result = substrings(n);
+
+    fout << result << "\n";
+
+    fout.close();
+
+    return 0;
+}
