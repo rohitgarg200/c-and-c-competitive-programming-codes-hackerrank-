@@ -1,0 +1,160 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+vector<string> split_string(string);
+int find(vector<string> matrix,int index,int jndex,int index1,int jndex1,int k,int y){
+cout<<"1";
+    if(index>=matrix.size() || jndex>=matrix[0].size() || index<=-1|| jndex<=-1){
+        return 0;
+    }
+if(index==index1 && jndex==jndex1){
+    if(k==y){
+        return 1;
+    }
+    else 
+    return 0;
+}
+if(matrix[index][jndex]=='.'){
+    matrix[index][jndex]='/';
+    int count=0;
+    if(index+1<matrix.size() && (matrix[index+1][jndex]=='.' ||matrix[index+1][jndex]=='*') ){
+        count++;
+    }
+     if(jndex+1<matrix[0].size() && (matrix[index][jndex+1]=='.' ||matrix[index][jndex+1]=='*')){
+        count++;
+    }
+     if(index-1>=0 &&(matrix[index-1][jndex]=='.' ||matrix[index-1][jndex]=='*') ){
+        count++;
+    }
+     if(jndex-1>=0 && (matrix[index][jndex-1]=='.' ||matrix[index][jndex-1]=='*') ){
+        count++;
+    }
+    if(count>=2){
+        y++;
+    }
+    return find(matrix,index+1,jndex,index1,jndex1,k,y)+find(matrix,index,jndex+1,index1,jndex1,k,y)+find(matrix,index-1,jndex,index1,jndex1,k,y)+find(matrix,index,jndex-1,index1,jndex1,k,y);
+}
+else {
+    return 0;
+}
+return 0;
+}
+// Complete the countLuck function below.
+string countLuck(vector<string> matrix, int k) {
+
+    int index,jndex,index1,jndex1;
+    int count=0;
+    for(int i=0;i<matrix.size();i++){
+        for(int j=0;j<matrix[0].size();j++){
+            if(matrix[i][j]=='M'){
+                index=i;
+                jndex=j;
+                count++;
+            }
+            if(matrix[i][j]=='*'){
+                index1=i;
+                jndex1=j;
+                count++;
+            }
+            if(count>=2){
+                break;
+
+            }
+        }        
+    }
+    int y=0;
+    //cout<<"2"<<endl;
+    count=0;
+    if(index+1<matrix.size() && matrix[index+1][jndex]=='.' ){
+        count++;
+    }
+     if(jndex+1<matrix[0].size() && matrix[index][jndex+1]=='.'){
+        count++;
+    }
+     if(index-1>=0 &&matrix[index-1][jndex]=='.' ){
+        count++;
+    }
+     if(jndex-1>=0 && matrix[index][jndex-1]=='.'){
+        count++;
+    }
+    if(count>=2){
+        y++;
+    }
+    if(find(matrix,index+1,jndex,index1,jndex1,k,y)+find(matrix,index,jndex+1,index1,jndex1,k,y)+find(matrix,index-1,jndex,index1,jndex1,k,y)+find(matrix,index,jndex-1,index1,jndex1,k,y)){
+        return "Impressed";
+    }
+return "Oops!";
+
+
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    int t;
+    cin >> t;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    for (int t_itr = 0; t_itr < t; t_itr++) {
+        string nm_temp;
+        getline(cin, nm_temp);
+
+        vector<string> nm = split_string(nm_temp);
+
+        int n = stoi(nm[0]);
+
+        int m = stoi(nm[1]);
+
+        vector<string> matrix(n);
+
+        for (int i = 0; i < n; i++) {
+            string matrix_item;
+            getline(cin, matrix_item);
+
+            matrix[i] = matrix_item;
+        }
+
+        int k;
+        cin >> k;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        string result = countLuck(matrix, k);
+
+        fout << result << "\n";
+    }
+
+    fout.close();
+
+    return 0;
+}
+
+vector<string> split_string(string input_string) {
+    string::iterator new_end = unique(input_string.begin(), input_string.end(), [] (const char &x, const char &y) {
+        return x == y and x == ' ';
+    });
+
+    input_string.erase(new_end, input_string.end());
+
+    while (input_string[input_string.length() - 1] == ' ') {
+        input_string.pop_back();
+    }
+
+    vector<string> splits;
+    char delimiter = ' ';
+
+    size_t i = 0;
+    size_t pos = input_string.find(delimiter);
+
+    while (pos != string::npos) {
+        splits.push_back(input_string.substr(i, pos - i));
+
+        i = pos + 1;
+        pos = input_string.find(delimiter, i);
+    }
+
+    splits.push_back(input_string.substr(i, min(pos, input_string.length()) - i + 1));
+
+    return splits;
+}
