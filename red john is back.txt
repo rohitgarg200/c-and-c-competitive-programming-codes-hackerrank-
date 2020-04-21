@@ -1,0 +1,94 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int prim(int ret)
+{
+    if(ret<2){
+        return 0;
+    }
+    if(ret==2){
+        return 1;
+
+    }
+    if(ret==3){
+        return 2;
+    }
+    vector<int>a(ret+1,0);
+    int r=0;
+    for(int i=2;i<=sqrt(ret);i++){
+        if(a[i]==0){
+        int j=i;
+        int mul=2;
+        while(j*mul<=ret){
+            a[j*mul]=1;
+            mul++;
+        }
+        }
+    }
+    for(int i=2;i<=ret;i++){
+        if(a[i]==0){
+            r++;
+        }
+    }
+    return r;
+}
+
+int fact(int t){
+    if(t==0){
+        return 1;
+    }
+    int k=1;
+    for(int i=1;i<=t;i++){
+k=k*i;
+    }
+    return k;
+}
+// Complete the redJohn function below.
+int redJohn(int n) {
+int ret=1;
+int t=1;
+if(n<=3){
+    return 0;
+}
+vector<int>a(n+1,0);
+a[0]=1;
+a[1]=1;
+a[2]=1;
+a[3]=1;
+for(int i=4;i<=n;i++){
+    a[i]=a[i-1]+a[i-4];
+}
+
+
+   // cout<<ret<<endl;
+    int p=prim(a[n]);
+    return p;
+
+
+
+
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    int t;
+    cin >> t;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    for (int t_itr = 0; t_itr < t; t_itr++) {
+        int n;
+        cin >> n;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        int result = redJohn(n);
+
+        fout << result << "\n";
+    }
+
+    fout.close();
+
+    return 0;
+}
